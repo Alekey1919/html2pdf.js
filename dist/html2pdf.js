@@ -332,7 +332,7 @@ var orig = {
 }; // Add pagebreak default options to the Worker template.
 
 _worker_js__WEBPACK_IMPORTED_MODULE_5__.default.template.opt.pagebreak = {
-  mode: ['css', 'legacy'],
+  mode: ["css", "legacy"],
   before: [],
   after: [],
   avoid: []
@@ -347,26 +347,26 @@ _worker_js__WEBPACK_IMPORTED_MODULE_5__.default.prototype.toContainer = function
 
     var modeSrc = [].concat(this.opt.pagebreak.mode);
     var mode = {
-      avoidAll: modeSrc.indexOf('avoid-all') !== -1,
-      css: modeSrc.indexOf('css') !== -1,
-      legacy: modeSrc.indexOf('legacy') !== -1
+      avoidAll: modeSrc.indexOf("avoid-all") !== -1,
+      css: modeSrc.indexOf("css") !== -1,
+      legacy: modeSrc.indexOf("legacy") !== -1
     }; // Get arrays of all explicitly requested elements.
 
     var select = {};
     var self = this;
-    ['before', 'after', 'avoid'].forEach(function (key) {
-      var all = mode.avoidAll && key === 'avoid';
+    ["before", "after", "avoid"].forEach(function (key) {
+      var all = mode.avoidAll && key === "avoid";
       select[key] = all ? [] : [].concat(self.opt.pagebreak[key] || []);
 
       if (select[key].length > 0) {
-        select[key] = Array.prototype.slice.call(root.querySelectorAll(select[key].join(', ')));
+        select[key] = Array.prototype.slice.call(root.querySelectorAll(select[key].join(", ")));
       }
     }); // Get all legacy page-break elements.
 
-    var legacyEls = root.querySelectorAll('.html2pdf__page-break');
+    var legacyEls = root.querySelectorAll(".html2pdf__page-break");
     legacyEls = Array.prototype.slice.call(legacyEls); // Loop through all elements.
 
-    var els = root.querySelectorAll('*');
+    var els = root.querySelectorAll("*");
     Array.prototype.forEach.call(els, function pagebreak_loop(el) {
       // Setup pagebreak rules based on legacy and avoidAll modes.
       var rules = {
@@ -380,8 +380,8 @@ _worker_js__WEBPACK_IMPORTED_MODULE_5__.default.prototype.toContainer = function
         var style = window.getComputedStyle(el); // TODO: Handle 'left' and 'right' correctly.
         // TODO: Add support for 'avoid' on breakBefore/After.
 
-        var breakOpt = ['always', 'page', 'left', 'right'];
-        var avoidOpt = ['avoid', 'avoid-page'];
+        var breakOpt = ["always", "page", "left", "right"];
+        var avoidOpt = ["avoid", "avoid-page"];
         rules = {
           before: rules.before || breakOpt.indexOf(style.breakBefore || style.pageBreakBefore) !== -1,
           after: rules.after || breakOpt.indexOf(style.breakAfter || style.pageBreakAfter) !== -1,
@@ -409,10 +409,11 @@ _worker_js__WEBPACK_IMPORTED_MODULE_5__.default.prototype.toContainer = function
 
 
       if (rules.before) {
-        var pad = (0,_utils_js__WEBPACK_IMPORTED_MODULE_6__.createElement)('div', {
+        var pad = (0,_utils_js__WEBPACK_IMPORTED_MODULE_6__.createElement)("div", {
           style: {
-            display: 'block',
-            height: Math.floor(pxPageHeight - clientRect.top % pxPageHeight) + 'px'
+            display: "block",
+            width: "100%",
+            height: Math.floor(pxPageHeight - clientRect.top % pxPageHeight) + "px"
           }
         });
         el.parentNode.insertBefore(pad, el);
@@ -420,10 +421,11 @@ _worker_js__WEBPACK_IMPORTED_MODULE_5__.default.prototype.toContainer = function
 
 
       if (rules.after) {
-        var pad = (0,_utils_js__WEBPACK_IMPORTED_MODULE_6__.createElement)('div', {
+        var pad = (0,_utils_js__WEBPACK_IMPORTED_MODULE_6__.createElement)("div", {
           style: {
-            display: 'block',
-            height: Math.floor(pxPageHeight - clientRect.bottom % pxPageHeight) + 'px'
+            display: "block",
+            width: "100%",
+            height: Math.floor(pxPageHeight - clientRect.bottom % pxPageHeight) + "px"
           }
         });
         el.parentNode.insertBefore(pad, el.nextSibling);
