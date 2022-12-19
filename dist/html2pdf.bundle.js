@@ -1510,11 +1510,12 @@ _worker_js__WEBPACK_IMPORTED_MODULE_5__.default.prototype.toContainer = function
 
 
       if (rules.before) {
+        var height = clientRect.top >= 0 ? pxPageHeight - clientRect.top % pxPageHeight : Math.abs(clientRect.top);
         var pad = (0,_utils_js__WEBPACK_IMPORTED_MODULE_6__.createElement)("div", {
           style: {
             display: "block",
             width: "100%",
-            height: Math.floor(pxPageHeight - clientRect.top % pxPageHeight) + "px"
+            height: height + "px"
           }
         });
         el.parentNode.insertBefore(pad, el);
